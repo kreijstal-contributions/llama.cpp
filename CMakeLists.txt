@@ -691,6 +691,12 @@ add_library(llama
             llama.h
             )
 
+if(WIN32)
+    # It requires Windows 8.1 or later for PrefetchVirtualMemory
+    target_compile_definitions(llama PRIVATE -D_WIN32_WINNT=0x0602)
+endif()
+
+
 target_include_directories(llama PUBLIC .)
 target_compile_features(llama PUBLIC cxx_std_11) # don't bump
 target_link_libraries(llama PRIVATE
